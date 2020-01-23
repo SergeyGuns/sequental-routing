@@ -9,7 +9,7 @@ export default function drawScenario(
   return json.map((scene, i, json) =>
     scene.slides
       .map((slide, j, slides) => {
-        const preffix = j === 0 ? "\n" + "-".repeat(deep) + "`" : " ";
+        const preffix = j === 0 ? "\n" + "`" + "----".repeat(deep) : " ";
         let tmpClassName = "slide";
         slide === activeSlide && (tmpClassName = tmpClassName + " activeSlide");
 
@@ -26,7 +26,7 @@ export default function drawScenario(
                   (scene.name === activeSceneName ? "scene_name--active" : "")
                 }
               >
-                {"\n" + scene.name}
+                {"\n" + "----".repeat(deep) + scene.name}
               </span>
             )}
             <span

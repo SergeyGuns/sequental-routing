@@ -4,15 +4,16 @@ scenario:
   hrefs:
     btn1: # Портреты пациентов
     - to: '1904_005,portraits_of_patients'
+
   slides: 
   - '1904_003'
+  - '1904_004'
   children:
-  - scenario:
     name: portraits_of_patients
     slides:
     - '1904_005'
+    - '1904_009,pacientka_1'
     children:
-    - scenario: #
       name: pacientka_1
       slides:
       - '1904_009'
@@ -21,7 +22,7 @@ scenario:
       - scenario:
         name: galvus_met
         hrefs:
-          btn1_vAroda:
+          1904_014_btn1_vAroda:
           - to: '1904_014,vAroda' # try will find in children then try find from root
           btn2_initial:
           - to: '1904_056,initial'
@@ -30,6 +31,25 @@ scenario:
           btn4_hba1c:
           - to: ()=>'1904_043,hba1c'
         slides:
+        - '1904_56'
+        - '1904_012'
+        - '2001_verify_019'
+        - '2001_verify_021'
+        - '1904_010,pacientka_1'
+      chidren:
+      - scenario:
+        name: galvus_met
+        hrefs:
+          1904_014_btn1_vAroda:
+          - to: '1904_014,vAroda' # try will find in children then try find from root
+          btn2_initial:
+          - to: '1904_056,initial'
+          btn3_bosi: 
+          - to: '1904_013,bosi'
+          btn4_hba1c:
+          - to: ()=>'1904_043,hba1c'
+        slides:
+        - '1904_56'
         - '1904_012'
         - '2001_verify_019'
         - '2001_verify_021'
@@ -52,7 +72,7 @@ scenario:
           - '1904_012,galvus_met'
         - scenario:
           name: hba1c
-          slides: ['1904_043', '1904_044', '1904_012,galvus_met']
+          slides: ['1904_012,galvus_met', '1904_043', '1904_044','1904_012,galvus_met' ]
           - scenario:
           name: sakg
           slides:

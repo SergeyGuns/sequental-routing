@@ -13,17 +13,23 @@
       {
         "name": "portraits_of_patients",
         "slides": ["1904_005"],
+        "hrefs": {
+          "btn1": "1904_009,pacientka_1"
+        },
         "children": [
           {
             "name": "pacientka_1",
             "slides": ["1904_009", "1904_010"],
+            "hrefs": {
+              "btn1":  "1904_012,galvus_met"
+            },
             "children": [
               {
                 "name": "galvus_met",
                 "hrefs": {
                   "btn1_vAroda": [
                     {
-                      "to": "1904_014,vAroda"
+                      "to": "1904_014,vAroda "
                     }
                   ],
                   "btn2_initial": [
