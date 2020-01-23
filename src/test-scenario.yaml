@@ -1,0 +1,78 @@
+---
+scenario:
+  name: main
+  hrefs:
+    btn1: # Портреты пациентов
+    - to: '1904_005,portraits_of_patients'
+  slides: 
+  - '1904_003'
+  children:
+  - scenario:
+    name: portraits_of_patients
+    slides:
+    - '1904_005'
+    children:
+    - scenario: #
+      name: pacientka_1
+      slides:
+      - '1904_009'
+      - '1904_010'
+      chidren:
+      - scenario:
+        name: galvus_met
+        hrefs:
+          btn1_vAroda:
+          - to: '1904_014,vAroda' # try will find in children then try find from root
+          btn2_initial:
+          - to: '1904_056,initial'
+          btn3_bosi: 
+          - to: '1904_013,bosi'
+          btn4_hba1c:
+          - to: ()=>'1904_043,hba1c'
+        slides:
+        - '1904_012'
+        - '2001_verify_019'
+        - '2001_verify_021'
+        - '1904_010,pacientka_1'
+        children:
+        - scenario:
+          name: vAroda
+          slides:
+          - '1904_014'
+          - '1904_012,galvus_met'
+        - scenario:
+          name: initial
+          slides:
+          - '1904_056'
+          - '1904_012,galvus_met'
+        - scenario:
+          name: bosi
+          slides:
+          - '1904_013'
+          - '1904_012,galvus_met'
+        - scenario:
+          name: hba1c
+          slides: ['1904_043', '1904_044', '1904_012,galvus_met']
+          - scenario:
+          name: sakg
+          slides:
+          - '1904_051_2'
+          - '1904_012,galvus_met'
+        - scenario:
+          name: gpn
+          slides:
+          - '1904_051_3'
+          - '1904_012,galvus_met'
+      
+scenario-exmple:
+  name: main
+  hrefs:
+    btn1: # Портреты пациентов
+    - to: '1904_005'
+    - from: main.branch-one
+      to: '1904_005'
+    - condition: function(){true}
+      to: '1904_005'
+    main_btn2:
+      slide: '03'
+      scene: main.branch-one

@@ -1,0 +1,80 @@
+[
+  {
+    "name": "main",
+    "hrefs": {
+      "btn1": [
+        {
+          "to": "1904_005,portraits_of_patients"
+        }
+      ]
+    },
+    "slides": ["1904_003"],
+    "children": [
+      {
+        "name": "portraits_of_patients",
+        "slides": ["1904_005"],
+        "children": [
+          {
+            "name": "pacientka_1",
+            "slides": ["1904_009", "1904_010"],
+            "children": [
+              {
+                "name": "galvus_met",
+                "hrefs": {
+                  "btn1_vAroda": [
+                    {
+                      "to": "1904_014,vAroda"
+                    }
+                  ],
+                  "btn2_initial": [
+                    {
+                      "to": "1904_056,initial"
+                    }
+                  ],
+                  "btn3_bosi": [
+                    {
+                      "to": "1904_013,bosi"
+                    }
+                  ],
+                  "btn4_hba1c": [
+                    {
+                      "to": "()=>'1904_043,hba1c'"
+                    }
+                  ]
+                },
+                "slides": [
+                  "1904_012",
+                  "2001_verify_019",
+                  "2001_verify_021",
+                  "1904_010,pacientka_1"
+                ],
+                "children": [
+                  {
+                    "name": "vAroda",
+                    "slides": ["1904_014", "1904_012,galvus_met"]
+                  },
+                  {
+                    "name": "initial",
+                    "slides": ["1904_056", "1904_012,galvus_met"]
+                  },
+                  {
+                    "name": "bosi",
+                    "slides": ["1904_013", "1904_012,galvus_met"]
+                  },
+                  {
+                    "name": "sakg",
+                    "slides": ["1904_051_2", "1904_012,galvus_met"]
+                  },
+                  {
+                    "name": "gpn",
+                    "slides": ["1904_051_3", "1904_012,galvus_met"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
