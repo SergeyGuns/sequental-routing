@@ -2,11 +2,11 @@ import React from "react";
 import test from "./test-scenario.json";
 import "./App.css";
 import drawScenario from "./drawScenario";
-import drawSceneBtns from "./drawSceneBtns";
+import Btns from "./components/Btns";
 console.log(test);
 function App() {
   const [activeSlide, setActiveSlide] = React.useState(test[0].slides[0]);
-  const [activeScene, setActiveScene] = React.useState(test[0].name);
+  const [activeScene, setActiveScene] = React.useState(test[0].NAME);
 
   function handleClick({ target: { dataset } }) {
     if (dataset.href) {
@@ -20,7 +20,7 @@ function App() {
   return (
     <div onClick={handleClick} className="App">
       <pre>{drawScenario(test, 0, activeScene, activeSlide)}</pre>
-      <pre className="btns">{drawSceneBtns(test, activeScene)}</pre>
+      <Btns json={test} activeScene={activeScene} />
     </div>
   );
 }

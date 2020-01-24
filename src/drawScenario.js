@@ -1,47 +1,41 @@
 import React from "react";
-export default function drawScenario(
-  json,
-  deep = 0,
-  activeSceneName,
-  activeSlide
-) {
+export default function Scenario(json, deep = 0, activeSceneName, activeSlide) {
   if (json === undefined) return "";
-  return json.map((scene, i, json) =>
+  return json.map(scene =>
     scene.slides
-      .map((slide, j, slides) => {
-        const preffix = j === 0 ? "\n" + "`" + "----".repeat(deep) : " ";
+      .map((slide, j) => {
+        const preffix = j === 0 ? "\n" + "    ".repeat(deep) + "`" : " - ";
         let tmpClassName = "slide";
         slide === activeSlide && (tmpClassName = tmpClassName + " activeSlide");
 
         slide === activeSlide &&
-          scene.name === activeSceneName &&
+          scene.NAME === activeSceneName &&
           (tmpClassName = tmpClassName + " active");
 
         return (
           <>
             {j === 0 && (
               <span
+                key={scene.NAME + slide + deep}
                 className={
                   "scene_name " +
-                  (scene.name === activeSceneName ? "scene_name--active" : "")
+                  (scene.NAME === activeSceneName ? "scene_name--active" : "")
                 }
               >
-                {"\n" + "----".repeat(deep) + scene.name}
+                {"\n" + "        ".repeat(deep) + scene.NAME}
               </span>
             )}
             <span
               className={tmpClassName}
-              id={scene.name + slide}
-              data-href={`${slide},${scene.name}`}
-              key={scene.name + slide}
+              id={scene.NAME + slide}
+              data-href={`${slide},${scene.NAME}`}
+              key={scene.NAME + slide}
             >
               {preffix + slide}
             </span>
           </>
         );
       })
-      .concat(
-        drawScenario(scene.children, deep + 1, activeSceneName, activeSlide)
-      )
+      .concat(Scenario(scene.children, deep + 1, activeSceneName, activeSlide))
   );
 }
