@@ -2,15 +2,22 @@ class Router {
   /**
    *
    * @param {object} params
+   * @param {string} params.currPresentation
    * @param {string} params.activeScene активная ветка сценария
    * @param {string} params.activeSlide активный слайд
    * @param {object} params.scenario объект сценария
    * @param {string} params.fullPath полный путь до активного сценария
+   * @param {object} params.window
    */
   constructor(params) {
     for (const key in params) {
       this[key] = params[key];
     }
+    this.window = params.window || window;
+    this.currPresentation =
+      params.currPresentation || window.CURRENT_PRESENTATION;
+    this.findNextSlide();
+    this.findPrevSlide();
   }
   getActiveSlideScene() {
     return this.findSlideScene(
@@ -33,18 +40,42 @@ class Router {
   }
   goTo(path) {
     path = path.split(",");
-    if (path.length === 3) {
-      const [slide, scene, presentation] = path;
-      window.sessionStorage.setItem(path[2] + "_activeScene", scene);
-      document.location = presentation + "/" + presentation + "_" + slide;
+    if (path.length === 1) {
+      const [slide] = path;
+      this.activeSlide = slide;
+      this.window.document.location =
+        this.currPresentation +
+        "/" +
+        this.currPresentation +
+        "_" +
+        slide +
+        ".html";
     }
     if (path.length === 2) {
       const [slide, scene] = path;
+      this.activeScene = scene;
+      this.activeSlide = slide;
+      this.window.sessionStorage.setItem(path[2] + "_activeScene", scene);
+      this.window.document.location =
+        this.currPresentation +
+        "/" +
+        this.currPresentation +
+        "_" +
+        slide +
+        ".html";
+    }
+    if (path.length === 3) {
+      const [slide, scene, presentation] = path;
+      this.activeScene = scene;
+      this.activeSlide = slide;
       window.sessionStorage.setItem(path[2] + "_activeScene", scene);
-      document.location = presentation + "/" + presentation + "_" + slide;
+      document.location =
+        presentation + "/" + presentation + "_" + slide + ".html";
     }
   }
-  goNext() {}
+  goNext() {
+    this.goTo(this.activeSlide);
+  }
   goPrev() {}
   findActiveSceneSlides() {}
   findSlideScene(scenario, sceneName, slide) {
