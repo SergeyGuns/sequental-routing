@@ -14,67 +14,46 @@ class Router {
       this[key] = params[key];
     }
     this.window = params.window || window;
-    this.currPresentation =
-      params.currPresentation || window.CURRENT_PRESENTATION;
+    this.currPresentation = params.currPresentation || window.CURRENT_PRESENTATION;
     this.findNextSlide();
     this.findPrevSlide();
   }
   getActiveSlideScene() {
-    return this.findSlideScene(
-      this.scenario,
-      this.activeScene,
-      this.activeSlide
-    );
+    return this.findSlideScene(this.scenario, this.activeScene, this.activeSlide);
   }
   findNextSlide() {
     const { slides, slideIndex } = this.getActiveSlideScene();
-    console.log({ slides, slideIndex });
-
     return (this.nextSlide = slides[slideIndex + 1] || null);
   }
   findPrevSlide() {
     const { slides, slideIndex } = this.getActiveSlideScene();
-    console.log({ slides, slideIndex });
-
     return (this.prevSlide = slides[slideIndex - 1] || null);
   }
   goTo(path) {
-    path = path.split(",");
+    path = path.split(',');
     if (path.length === 1) {
       const [slide] = path;
       this.activeSlide = slide;
       this.window.document.location =
-        this.currPresentation +
-        "/" +
-        this.currPresentation +
-        "_" +
-        slide +
-        ".html";
+        this.currPresentation + '/' + this.currPresentation + '_' + slide + '.html';
     }
     if (path.length === 2) {
       const [slide, scene] = path;
       this.activeScene = scene;
       this.activeSlide = slide;
-      this.window.sessionStorage.setItem(path[2] + "_activeScene", scene);
-      this.window.document.location =
-        this.currPresentation +
-        "/" +
-        this.currPresentation +
-        "_" +
-        slide +
-        ".html";
+      this.window.sessionStorage.setItem(path[2] + '_activeScene', scene);
+      this.window.document.location = `${this.currPresentation}/${this.currPresentation}_${slide}.html`;
     }
     if (path.length === 3) {
       const [slide, scene, presentation] = path;
       this.activeScene = scene;
       this.activeSlide = slide;
-      window.sessionStorage.setItem(path[2] + "_activeScene", scene);
-      document.location =
-        presentation + "/" + presentation + "_" + slide + ".html";
+      window.sessionStorage.setItem(path[2] + '_activeScene', scene);
+      document.location = `${presentation}/${presentation}_${slide}.html`;
     }
   }
   goNext() {
-    this.goTo(this.activeSlide);
+    this.goTo(this.nextSlide);
   }
   goPrev() {}
   findActiveSceneSlides() {}
@@ -84,11 +63,7 @@ class Router {
       if (result !== null) return;
       if (scene.NAME !== sceneName) {
         if (scene.children !== undefined) {
-          return (result = this.findSlideScene(
-            scene.children,
-            sceneName,
-            slide
-          ));
+          return (result = this.findSlideScene(scene.children, sceneName, slide));
         }
       }
       const index = scene.slides.indexOf(slide);
@@ -96,7 +71,7 @@ class Router {
         throw `В сцене ${sceneName} нету слайда ${slide}`;
       }
       if (result !== null) {
-        throw "Есть две или более сцены с одним названием";
+        throw 'Есть две или более сцены с одним названием';
       }
       result = {
         ...scene,
